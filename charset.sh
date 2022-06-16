@@ -17,9 +17,9 @@ fi
  
 if grep -q $charset $fileName
 then
-	sed -i 's/.*<meta charset=.*/<meta charset="'$encoding'">/g' $fileName
+	sed -i 's/.*<meta charset=.*/\t\t<meta charset="'$encoding'">/g' $fileName
 else
-	sed -i '/<head>/a <meta charset="'$encoding'">' $fileName
+	sed -i '/<head>/a\\t\t<meta charset="'$encoding'">' $fileName
 fi
 
 
