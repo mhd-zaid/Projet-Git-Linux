@@ -7,8 +7,7 @@ if [ $# -ne 2 ]
           exit 0
 fi
 
-#Vérifier les droits de l'utilisateur
-
+#Vérifie les droits de l'utilisateur sur le fichier
 if [ ! -w "$2" ]
   then
           echo "Vous ne pouvez pas éditer $2"
@@ -16,16 +15,10 @@ if [ ! -w "$2" ]
 fi
 
 if grep -q "<title>" $2
-    #Mettre à jour la balise title
+    #Met à jour la balise title
     then
-        echo "Nous allons remplacer le titre par $1"
-    #    sed -i "s/.*<title>*<title>0*/<title>"$1"</title>" $2
-    #    sed "s/<title>Document<\/title>/toto/g" $2
-        sed "/<title>/d" $2 >> $2
-        sed -i "/<head>/a <title>"$1"</title>" $2
-    #Créer la baslise title
+        sed -i 's/<title>.*<\/title>/<title>'$1'<\/title>/g' $2
+    #Crée la baslise title
     else
-        echo "Nous allons ajouter un titre $1"
-        sed "/<title>/d" $2 >> $2
-        sed -i "/<head>/a <title>"$1"</title>" $2
+        sed -i "/<head>/a<title>"$1"</title>" $2
 fi
