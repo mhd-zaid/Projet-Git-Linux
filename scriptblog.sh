@@ -91,7 +91,7 @@ do
                 fi 
                 
                 #On vérifie si l'utilisateur a la permission pour modifier le fichier
-                if [! -w $fileName ]
+                if [ ! -w $fileName ]
                 then 
                     echo "Vous n'avez pas la permission de modifier le fichier"
                 else
