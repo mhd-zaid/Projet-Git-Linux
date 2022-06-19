@@ -64,6 +64,33 @@ do
                     exit 0
             fi
             ;;
+            --update-title)
+            #Vérifie le nombre d'arguments
+            if [ $# -ne 3 ]
+            then
+                    echo "Error : Le nombre d'argument est incorrect."
+                    exit 0
+            fi
+
+            #Vérifie les droits de l'utilisateur sur le fichier
+            if [ ! -w "${arguments[$i+2]}" ]
+            then
+                    echo "Vous ne pouvez pas éditer ${arguments[$i+2]}"
+                    exit 0
+            fi
+
+            #Vérifie l'existence d'une balise title
+            if grep -q "<title>" ${arguments[$i+2]}
+            #Met à jour la balise title
+            then
+                sed -i 's/<title>.*<\/title>/<title>'${arguments[$i+1]}'<\/title>/g' ${arguments[$i+2]}
+                exit 0
+            #Crée la baslise title
+            else
+                sed -i "/<head>/a<title>"${arguments[$i+1]}"</title>" ${arguments[$i+2]}
+                exit 0
+            fi
+            ;;
             --update-charset)
                 charset='charset=';
                 encoding=${arguments[$i+1]};
