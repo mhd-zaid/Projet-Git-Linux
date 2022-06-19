@@ -105,7 +105,62 @@ do
                         sed -i '/<head>/a\\t\t<meta charset="'$encoding'">' $fileName
                     fi
                 fi
-            ;;
-    esac 
-done
 
+            ;;
+
+            --update-description)
+
+            #Script de configuration d'un blog
+            #Création/modification du meta Description
+
+
+
+
+          
+
+                if [ -z "$2"];then
+
+                    echo 'le filename est vide'
+
+                else
+
+                    filename=$2
+
+                fi
+
+                if [ -z "$2"];
+                then
+                    echo'la description est vide'
+
+                else
+                    description=$2
+                fi
+
+                if [ ! -w "$filename" ];
+
+                then 
+                    echo 'le user ne peut pas ecrire'
+
+                fi
+
+                if grep -q $description $filename
+
+                then
+                    echo ' <meta name ="description" content="$1">'
+                else 
+
+          	  
+                if grep -q $description $filename
+                then
+                    sed -i 's/.<meta description=./\t\t<meta description="'$description'">/g' $filename
+
+
+                else
+                    sed -i '/<head>/a\t\t<meta description="'$description'">' $filename
+
+                fi
+            	fi                
+                esac 
+            done
+
+        
