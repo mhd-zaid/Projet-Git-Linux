@@ -1,0 +1,21 @@
+name: Test-code
+
+on: [push ]
+schedule:
+    - cron: "0 0 * ? * *"
+
+jobs:
+  test:
+    name: test code
+    runs-on: ubuntu:20.04
+    steps:
+      - name: add-stylesheet
+        run: if[scriptblog.sh --add-stylesheet style.css index.html];then; echo "done";
+      - name: add-stylesheet
+      run: if[scriptblog.sh --create-HTML];then; echo "done";
+      - name: add-stylesheet
+      run: if[scriptblog.sh --update-title "Sakura" index.html];then; echo "done";
+      - name: add-stylesheet
+      run: if[scriptblog.sh --update-charset "UTF-8" index.html];then; echo "done";
+      - name: add-stylesheet
+      run: if[scriptblog.sh --update-description "Ceci est une description" index.html];then; echo "done";
