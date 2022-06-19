@@ -114,18 +114,17 @@ do
             #Création/modification du meta Description
 
 
-            description='description='
 
 
-            if [ $1 = "--update-description"]; then
+          
 
-                if [ -z "$3"];then
+                if [ -z "$2"];then
 
                     echo 'le filename est vide'
 
                 else
 
-                    filename=$3
+                    filename=$2
 
                 fi
 
@@ -150,7 +149,7 @@ do
                     echo ' <meta name ="description" content="$1">'
                 else 
 
-            
+          	  
                 if grep -q $description $filename
                 then
                     sed -i 's/.<meta description=./\t\t<meta description="'$description'">/g' $filename
@@ -160,8 +159,7 @@ do
                     sed -i '/<head>/a\t\t<meta description="'$description'">' $filename
 
                 fi
-                ;;
-                
+            	fi                
                 esac 
             done
 
